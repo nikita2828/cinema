@@ -1,0 +1,175 @@
+* {
+  box-sizing: border-box;
+}
+.container-fluide{
+  display: flex;
+  flex-direction: column;
+  
+}
+.navbar{
+  z-index: 100;
+}
+.nav_img {
+  margin-right: 5px;
+}
+
+.nav-link {
+  border-right: 1px solid transparent;
+  border-left: 1px solid transparent;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+  border-right: 1px solid white;
+  border-left: 1px solid white;
+  transition: border 0.3s;
+  transition: color 0.3s;
+}
+
+.search_input {
+  width: 190px;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  transition: width 0.3s ease-in-out;
+  margin: 0 0 0 auto;
+  outline: none;
+  border: none;
+  padding: 0 0 0 35px;
+  background-image: url(https://img.icons8.com/color/48/000000/search.png);
+  background-repeat: no-repeat;
+  background-size: 40px;
+}
+
+.search_input:focus {
+  width: 100%;
+}
+
+.search_form {
+  display: flex;
+  flex-direction: row;
+  width: 55%;
+}
+
+ /* form for adding a movie */
+
+#wrap_cinema_add {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 60px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.input_cinema_add::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  background: rgb(0,123,255);
+}
+.header_cinema_add {
+  position: relative;
+  padding-top: 80px;
+  color: #fff;
+}
+.header_cinema_add h1 {
+  padding-bottom: 25px;
+  font-size: 3.25em;
+  font-weight: 100;
+}
+.content_cinema_add {
+  position: relative;
+  padding: 44px 55px;
+  background: #fff;
+  z-index: 10;
+}
+
+.content_cinema_add .inputbox {
+  overflow: hidden;
+  position: relative;
+  padding: 15px 0 28px 200px;
+}
+.content_cinema_add .inputbox-title {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  width: 200px;
+  height: 30px;
+  color: #666;
+  font-weight: bold;
+  line-height: 30px;
+}
+.content_cinema_add .inputbox-content {
+  position: relative;
+  width: 100%;
+}
+.content_cinema_add .inputbox-content input {
+  width: 100%;
+  height: 30px;
+  box-sizing: border-box;
+  line-height: 30px;
+  font-size: 14px;
+  border: 0;
+  background: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+.content_cinema_add .inputbox-content input:focus ~ label, .content_cinema_add .inputbox-content input:valid ~ label {
+  color: #2962ff;
+  transform: translateY(-20px);
+  font-size: 0.825em;
+  cursor: default;
+}
+.content_cinema_add .inputbox-content input:focus ~ .underline {
+  width: 100%;
+}
+.content_cinema_add .inputbox-content label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30px;
+  line-height: 30px;
+  color: #ccc;
+  cursor: text;
+  transition: all 200ms ease-out;
+  z-index: 10;
+}
+.content_cinema_add .inputbox-content .underline {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #2962ff;
+  transition: all 200ms ease-out;
+}
+.content_cinema_add.btns {
+  padding: 30px 0 0 200px;
+}
+.content_cinema_add .btns .btn {
+  display: inline-block;
+  margin-right: 2px;
+  padding: 10px 25px;
+  background: none;
+  border: 1px solid #c0c0c0;
+  border-radius: 2px;
+  color: #666;
+  font-size: 1.125em;
+  outline: none;
+  transition: all 100ms ease-out;
+}
+.content_cinema_add .btns .btn:hover, .input-content .btns .btn:focus {
+  transform: translateY(-3px);
+}
+.content_cinema_add .btns .btn-confirm {
+  border: 1px solid #2962ff;
+  background: #2962ff;
+  color: #fff;
+}
