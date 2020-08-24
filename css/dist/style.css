@@ -54,6 +54,7 @@
  /* form for adding a movie */
 
 #wrap_cinema_add {
+  display:  none;
   width: 100%;
   max-width: 900px;
   margin: 0 auto 60px;
