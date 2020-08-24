@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <link rel="stylesheet" href="/css/dist/style.css">
+  <script src="/js/script.js"></script>
   <title>Hello, world!</title>
 </head>
 
@@ -59,7 +60,7 @@
           <dl class="inputbox">
             <dt class="inputbox-title">Год</dt>
             <dd class="inputbox-content">
-              <input id="input1" type="text" required />
+              <input id="input1" type="number" required />
               <label for="input1">Введите год</label>
               <span class="underline"></span>
             </dd>
@@ -88,28 +89,30 @@
               <span class="underline"></span>
             </dd>
           </dl>
-          <dl class="inputbox">
-            <dt class="inputbox-title">Описание</dt>
-            <dd class="inputbox-content">
-              <input id="input5" type="text" required />
-              <label for="input5">Введите описание фильма</label>
-              <span class="underline"></span>
-            </dd>
-          </dl>
+         
           <dl class="inputbox">
             <dt class="inputbox-title">Обложка</dt>
             <dd class="inputbox-content">
-              <input id="input6" type="text" required />
-              <label for="input6">Введите год</label>
+              <input id="input5" type="url" required />
+              <label for="input5">Введите ссылку на обложку</label>
               <span class="underline"></span>
             </dd>
           </dl>
           <dl class="inputbox">
             <dt class="inputbox-title">Фильм</dt>
             <dd class="inputbox-content">
-              <input id="input7" type="text" required />
-              <label for="input7">Введите год</label>
+              <input id="input6" type="url" required />
+              <label for="input6">Введите ссылку на фильм</label>
               <span class="underline"></span>
+            </dd>
+          </dl>
+          <dl class="inputbox">
+            <dt class="inputbox-title">Описание</dt>
+            <dd class="inputbox-content">
+              
+              <textarea name="" class="cinema_add_description"></textarea>
+              <label for="input7">Введите описание фильма</label>
+              <span class="underline underline_for_description"></span>
             </dd>
           </dl>
           <div class="btns">
