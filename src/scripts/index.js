@@ -1,12 +1,15 @@
 import '../styles/index.scss';
 import './dataApp.js';
+import {data} from "./dataApp.js"
 if (process.env.NODE_ENV === 'development') {
   require('../index.html');
 }
 
-console.log('webpack starterkit');
 
-const film_one = `<div class="film-one">
+
+
+console.log('webpack starterkit');
+const film_one = `
 <div class="film-name name"></div>
 <div class="film-card">
   <img class="img" width="145px" height="200px" src="" alt="" />
@@ -20,16 +23,15 @@ const film_one = `<div class="film-one">
   </b></p>
   </div>
 </div>
-</div>`
+`
 
-const film = document.querySelector(".film");
+// const film = document.querySelector(".film");
 //film
-const BASE_URL = 
+
 function getFilm(){
-  fetch(BASE_URL)
-  .then((films) => {
-    films.forEach(film => {
-      const kino;
+    data.forEach(film => {
+      const kino = document.createElement("div");
+      kino.carList.add("film_one");
       kino.innerHTML = film_one;
       const film_name = kino.querySelector(".name");
       const film_img = kino.querySelector(".img");
@@ -39,8 +41,19 @@ function getFilm(){
       const film_diretor = kino.querySelector(".director");
       const film_role = kino.querySelector(".role");
       const film_description = kino.querySelector(".description");
-    });
-  })
 
-  
-}
+      film_name = `${film.name}`;
+      film_img.setAttribute("src", film.img);
+      film_year = `${film.year}`;
+      film_country = `${film.country}`;
+      film_genre = `${film.genre}`;
+      film_diretor = `${film.director}`;
+      film_role = `${film.role}`;
+      film_description = `${film.description}`;
+
+      const film = document.querySelector(".film");
+
+      film.appendChild(kino);
+  });
+};
+getFilm()
