@@ -1,59 +1,60 @@
-import '../styles/index.scss';
-import './dataApp.js';
-import {data} from "./dataApp.js"
-if (process.env.NODE_ENV === 'development') {
-  require('../index.html');
+import "../styles/index.scss";
+import "./dataApp.js";
+import { data } from "./dataApp.js";
+if (process.env.NODE_ENV === "development") {
+  require("../index.html");
 }
 
-
-
-
-console.log('webpack starterkit');
+console.log("webpack starterkit");
 const film_one = `
-<div class="film-name name"></div>
+<div class="film-name">
+<span class="name"></span>
+<div class="film-btn">
+  <button class="change-btn btn btn-success">Изменить</button>
+  <button class="delete-btn btn btn-danger">Удалить</button>
+ </div>
+</div>
 <div class="film-card">
   <img class="img" width="145px" height="200px" src="" alt="" />
   <div class="film-info">
-    <p class="year"> <b>Год:</b> </p>
-    <p class="country"><b>Страна:</b> </p>
-    <p class="genre"><b>Жанр:</b></p>
-    <p class="director"><b>Режисер:</b> <p>
-    <p class="role"><b>Роли:</b></p>
-    <p class="description"><b>Описание: 
-  </b></p>
+    <p class="year"></p>
+    <p class="country"></p>
+    <p class="genre"></p>
+    <p class="director"><p>
+    <p class="role"></p>
+    <p class="description"></p>
   </div>
 </div>
-`
+`;
 
-// const film = document.querySelector(".film");
 //film
 
-function getFilm(){
-    data.forEach(film => {
-      const kino = document.createElement("div");
-      kino.carList.add("film_one");
-      kino.innerHTML = film_one;
-      const film_name = kino.querySelector(".name");
-      const film_img = kino.querySelector(".img");
-      const film_year = kino.querySelector(".year");
-      const film_country = kino.querySelector(".country");
-      const film_genre = kino.querySelector(".genre");
-      const film_diretor = kino.querySelector(".director");
-      const film_role = kino.querySelector(".role");
-      const film_description = kino.querySelector(".description");
+function getFilm() {
+  data.forEach((film) => {
+    const kino = document.createElement("div");
+    kino.classList.add("film-one");
+    kino.innerHTML = film_one;
+    const film_name = kino.querySelector(".name");
+    const film_img = kino.querySelector(".img");
+    const film_year = kino.querySelector(".year");
+    const film_country = kino.querySelector(".country");
+    const film_genre = kino.querySelector(".genre");
+    const film_diretor = kino.querySelector(".director");
+    const film_role = kino.querySelector(".role");
+    const film_description = kino.querySelector(".description");
 
-      film_name = `${film.name}`;
-      film_img.setAttribute("src", film.img);
-      film_year = `${film.year}`;
-      film_country = `${film.country}`;
-      film_genre = `${film.genre}`;
-      film_diretor = `${film.director}`;
-      film_role = `${film.role}`;
-      film_description = `${film.description}`;
+    film_name.innerText = `${film.name}`;
+    film_img.setAttribute("src", film.img);
+    film_year.innerHTML = `<b>Год:</b> ${film.year}`;
+    film_country.innerHTML = `<b>Страна:</b> ${film.country}`;
+    film_genre.innerHTML = `<b>Жанр:</b> ${film.genre}`;
+    film_diretor.innerHTML = `<b>Режиссер:</b> ${film.director}`;
+    film_role.innerHTML = `<b>Роли:</b> ${film.role}`;
+    film_description.innerHTML = `<b>Описание:</b> ${film.description}`;
 
-      const film = document.querySelector(".film");
+    const film_data = document.querySelector(".film");
 
-      film.appendChild(kino);
+    film_data.appendChild(kino);
   });
-};
-getFilm()
+}
+getFilm();

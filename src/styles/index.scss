@@ -1,5 +1,7 @@
 $body-color: #000000;
-
+* {
+  box-sizing: border-box;
+}
 body {
   color: $body-color;
   font-family: sans-serif;
@@ -16,19 +18,32 @@ body {
 
 }
 .film-name{
+  width: 100%;
+  height: 45px;
   background-color: #000000;
   color: #ffffff;
-  padding: 10px 0px 10px 10px;
   border-radius: 5px 5px 0 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  .name{
+    margin-left: 5px;
+  }
+  .film-btn{
+    margin-right: 5px;
+  }
 }
 
 .film-card{
   display: flex;
   flex-direction: row;
 }
+
 .film-info{
+  margin: 5px 5px 5px 5px;
   p{
-    margin: 0 0 5px 5px;
-    font-size: 14px;
+    margin: 0 0 5px 0;
+    font-size: 13px;
   }
 }
