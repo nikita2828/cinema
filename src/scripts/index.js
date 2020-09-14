@@ -58,3 +58,18 @@ function getFilm() {
   });
 }
 getFilm();
+
+
+// film create collapse
+
+let collapse = document.querySelector(".film-create-collapse");
+let film_create = document.querySelector(".film-create");
+collapse.addEventListener("click", () => {
+ if(film_create.style.display = "block"){
+  // collapse.src = "https://img.icons8.com/metro/452/expand-arrow.png";
+  film_create.style.display = "none";
+} else {
+  // collapse.src = "https://img.icons8.com/metro/452/collapse-arrow.png";
+  film_create.style.display = "block";
+ }
+});
