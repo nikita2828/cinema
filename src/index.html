@@ -12,7 +12,204 @@
     />
   </head>
   <body>
+    <div class="film-create-wrapper">
+      <div class="film-create">
+        <div class="film-create-inputs">
+          <div>
+            <p class="first-child">Введите название фильма</p>
+            <input type="text" />
+          </div>
+          <div>
+            <p>Введите год</p>
+            <input type="number" />
+          </div>
+          <div>
+            <p>Введите режиссера</p>
+            <input type="text" />
+          </div>
+          <div>
+            <p>Введите актеров</p>
+            <input type="text" />
+          </div>
+          <div>
+            <p>Введите адрес обложки</p>
+            <input type="url" />
+          </div>
+          <div>
+            <p>Введите адрес трейлера</p>
+            <input type="url" />
+          </div>
+        </div>
+
+        <p>Выберите жанр</p>
+        <div class="film-genre-wrapper">
+          <div class="film-genre-div">
+            <label for="film-genre-checkbox1"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox1"
+              />Вестерн</label
+            >
+            <label for="film-genre-checkbox2"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox2"
+              />Драма</label
+            >
+            <label for="film-genre-checkbox3"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox3"
+              />Детектив</label
+            >
+            <label for="film-genre-checkbox4"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox4"
+              />Биография</label
+            >
+            <label for="film-genre-checkbox5"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox5"
+              />Мелодрамма</label
+            >
+          </div>
+          <div class="film-genre-div">
+            <label for="film-genre-checkbox6">
+              <input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox6"
+              />Военные</label
+            >
+            <label for="film-genre-checkbox7"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox7"
+              />Боевики</label
+            >
+            <label for="film-genre-checkbox8"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox8"
+              />Комедии</label
+            >
+            <label for="film-genre-checkbox9"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox9"
+              />Криминальные</label
+            >
+            <label for="film-genre-checkbox10"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox10"
+              />Триллеры</label
+            >
+          </div>
+
+          <div class="film-genre-div">
+            <label for="film-genre-checkbox11"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox11"
+              />Исторические</label
+            >
+
+            <label for="film-genre-checkbox12"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox12"
+              />Документальные</label
+            >
+
+            <label for="film-genre-checkbox13"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox13"
+              />Приключения</label
+            >
+
+            <label for="film-genre-checkbox14"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox14"
+              />Мистические</label
+            >
+
+            <label for="film-genre-checkbox15"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox15"
+              />Ужасы</label
+            >
+          </div>
+
+          <div class="film-genre-div">
+            <label for="film-genre-checkbox16"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox16"
+              />Симейные</label
+            >
+            <label for="film-genre-checkbox17"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox17"
+              />Спортивные</label
+            >
+            <label for="film-genre-checkbox18"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox18"
+              />Фантастика</label
+            >
+            <label for="film-genre-checkbox19"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox19"
+              />Фентези</label
+            >
+            <label for="film-genre-checkbox20"
+              ><input
+                class="film-genre-input"
+                type="checkbox"
+                id="film-genre-checkbox20"
+              />Мюзиклы</label
+            >
+          </div>
+        </div>
+        <p>Введите описание</p>
+        <textarea class="film-create-description" rows="3"></textarea>
+        <div class="film-create-btn-wrapper">
+          <button class="film-create-btn btn btn-outline-success">
+            Создать фильм
+          </button>
+          <button class="film-create-btn film-create-btn-close btn btn-outline-danger">Отмена</button>
+        </div>
+      </div>
+    </div>
     <div class="container-fluide">
+     
       <div class="container">
         <div class="film-wrapper row">
           <ul class="list-group col-3">
@@ -21,178 +218,10 @@
             <li class="list-group-item">Актеры</li>
           </ul>
           <div class="film col-9">
-            <img class="film-create-collapse" src="https://img.icons8.com/metro/452/expand-arrow.png" width="30px" alt="">
-            <div class="film-create">
-              <p class="first-child">Введите название фильма</p>
-              <input type="text" />
-              <p>Введите год</p>
-              <input type="number" />
-              <p>Введите режиссера</p>
-              <input type="text">
-              <p>Выберите жанр</p>
-              <div class="film-genre-wrapper">
-                <div class="film-genre-div">
-                  <label for="film-genre-checkbox1"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox1"
-                    />Вестерн</label
-                  >
-                  <label for="film-genre-checkbox2"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox2"
-                    />Драма</label
-                  >
-                  <label for="film-genre-checkbox3"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox3"
-                    />Детектив</label
-                  >
-                  <label for="film-genre-checkbox4"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox4"
-                    />Биография</label
-                  >
-                  <label for="film-genre-checkbox5"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox5"
-                    />Мелодрамма</label
-                  >
-                </div>
-                <div class="film-genre-div">
-                  <label for="film-genre-checkbox6">
-                    <input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox6"
-                    />Военные</label
-                  >
-                  <label for="film-genre-checkbox7"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox7"
-                    />Боевики</label
-                  >
-                  <label for="film-genre-checkbox8"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox8"
-                    />Комедии</label
-                  >
-                  <label for="film-genre-checkbox9"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox9"
-                    />Криминальные</label
-                  >
-                  <label for="film-genre-checkbox10"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox10"
-                    />Триллеры</label
-                  >
-                </div>
-
-                <div class="film-genre-div">
-                  <label for="film-genre-checkbox11"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox11"
-                    />Исторические</label
-                  >
-
-                  <label for="film-genre-checkbox12"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox12"
-                    />Документальные</label
-                  >
-
-                  <label for="film-genre-checkbox13"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox13"
-                    />Приключения</label
-                  >
-
-                  <label for="film-genre-checkbox14"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox14"
-                    />Мистические</label
-                  >
-
-                  <label for="film-genre-checkbox15"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox15"
-                    />Ужасы</label
-                  >
-                </div>
-
-                <div class="film-genre-div">
-                  <label for="film-genre-checkbox16"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox16"
-                    />Симейные</label
-                  >
-                  <label for="film-genre-checkbox17"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox17"
-                    />Спортивные</label
-                  >
-                  <label for="film-genre-checkbox18"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox18"
-                    />Фантастика</label
-                  >
-                  <label for="film-genre-checkbox19"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox19"
-                    />Фентези</label
-                  >
-                  <label for="film-genre-checkbox20"
-                    ><input
-                      class="film-genre-input"
-                      type="checkbox"
-                      id="film-genre-checkbox20"
-                    />Мюзиклы</label
-                  >
-                </div>
-              </div>
-              <p>Введите описание</p>
-              <textarea class="film-create-description"  rows="3"></textarea>
-              <div class="film-create-btn-wrapper">
-                <button class="film-create-btn btn btn-outline-success">Создать фильм</button>
-              </div>
-
-              
+            <div class="film-create-btn-wrapper">
+              <button class="film-create-btn-open btn btn-outline-success">
+                Добавить фильм
+              </button>
             </div>
           </div>
         </div>
