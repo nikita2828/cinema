@@ -16,28 +16,28 @@
       <div class="film-create">
         <div class="film-create-inputs">
           <div>
-            <p class="first-child">Введите название фильма</p>
-            <input type="text" />
+            <p>Введите название фильма</p>
+            <input class="film-create-name" type="text" />
           </div>
           <div>
             <p>Введите год</p>
-            <input type="number" />
+            <input class="film-create-year" type="number" />
           </div>
           <div>
             <p>Введите режиссера</p>
-            <input type="text" />
+            <input class="film-create-director" type="text" />
           </div>
           <div>
             <p>Введите актеров</p>
-            <input type="text" />
+            <input class="film-create-role" type="text" />
           </div>
           <div>
             <p>Введите адрес обложки</p>
-            <input type="url" />
+            <input class="film-create-img type="url" />
           </div>
           <div>
             <p>Введите адрес трейлера</p>
-            <input type="url" />
+            <input class="film-create-video" type="url" />
           </div>
         </div>
 
@@ -49,6 +49,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox1"
+                value="Вестерн"
               />Вестерн</label
             >
             <label for="film-genre-checkbox2"
@@ -56,6 +57,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox2"
+                value="Драма"
               />Драма</label
             >
             <label for="film-genre-checkbox3"
@@ -63,6 +65,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox3"
+                value="Детектив"
               />Детектив</label
             >
             <label for="film-genre-checkbox4"
@@ -70,6 +73,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox4"
+                value="Биография"
               />Биография</label
             >
             <label for="film-genre-checkbox5"
@@ -77,6 +81,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox5"
+                value="Мелодрамма"
               />Мелодрамма</label
             >
           </div>
@@ -86,6 +91,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox6"
+                value="Военные"
               />Военные</label
             >
             <label for="film-genre-checkbox7"
@@ -93,6 +99,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox7"
+                value="Боевики"
               />Боевики</label
             >
             <label for="film-genre-checkbox8"
@@ -100,6 +107,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox8"
+                value="Комедии"
               />Комедии</label
             >
             <label for="film-genre-checkbox9"
@@ -107,6 +115,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox9"
+                value="Криминальные"
               />Криминальные</label
             >
             <label for="film-genre-checkbox10"
@@ -114,6 +123,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox10"
+                value="Триллеры"
               />Триллеры</label
             >
           </div>
@@ -124,6 +134,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox11"
+                value="Исторические"
               />Исторические</label
             >
 
@@ -132,6 +143,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox12"
+                value="Документальные"
               />Документальные</label
             >
 
@@ -140,6 +152,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox13"
+                value="Приключения"
               />Приключения</label
             >
 
@@ -148,6 +161,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox14"
+                value="Мистические"
               />Мистические</label
             >
 
@@ -156,6 +170,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox15"
+                value="Ужасы"
               />Ужасы</label
             >
           </div>
@@ -166,6 +181,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox16"
+                value="Симейные"
               />Симейные</label
             >
             <label for="film-genre-checkbox17"
@@ -173,6 +189,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox17"
+                value="Спортивные"
               />Спортивные</label
             >
             <label for="film-genre-checkbox18"
@@ -180,6 +197,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox18"
+                value="Фантастика"
               />Фантастика</label
             >
             <label for="film-genre-checkbox19"
@@ -187,6 +205,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox19"
+                value="Фентези"
               />Фентези</label
             >
             <label for="film-genre-checkbox20"
@@ -194,6 +213,7 @@
                 class="film-genre-input"
                 type="checkbox"
                 id="film-genre-checkbox20"
+                value="Мюзиклы"
               />Мюзиклы</label
             >
           </div>
@@ -201,7 +221,7 @@
         <p>Введите описание</p>
         <textarea class="film-create-description" rows="3"></textarea>
         <div class="film-create-btn-wrapper">
-          <button class="film-create-btn btn btn-outline-success">
+          <button class="film-create-btn film-create-btn-add btn btn-outline-success">
             Создать фильм
           </button>
           <button class="film-create-btn film-create-btn-close btn btn-outline-danger">Отмена</button>

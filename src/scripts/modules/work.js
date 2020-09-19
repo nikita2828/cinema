@@ -25,8 +25,17 @@ let film_create_wrapper = document.querySelector(".film-create-wrapper");
 let body = document.querySelector("body");
 let btn_close = document.querySelector(".film-create-btn-close");
 
-//film
+let name = document.querySelector(".film-create-name");
+let year = document.querySelector(".film-create-year");
+let director = document.querySelector(".film-create-director");
+let role = document.querySelector(".film-create-role");
+let img = document.querySelector(".film-create-img");
+let video = document.querySelector(".film-create-video");
+let genre = document.querySelector(".film-genre-input");
+let description = document.querySelector(".film-create-description");
+let btn_add = document.querySelector(".film-create-btn-add");
 
+//film
 function getFilm() {
   data.forEach((film) => {
     const kino = document.createElement("div");
@@ -58,16 +67,36 @@ function getFilm() {
 getFilm();
 
 // modal window
-
 btn_open.addEventListener("click", () => {
   film_create_wrapper.style.display = "block";
+  film_create_wrapper.style.opacity = "1";
   body.style.overflow = "hidden";
 });
 
 btn_close.addEventListener("click", () => {
   film_create_wrapper.style.display = "none";
+  film_create_wrapper.style.opacity = "0";
   body.style.overflow = "auto";
 });
 
-export { getFilm };
-console.log("hello");
+window.addEventListener("click", (event) => {
+    if (event.target == film_create_wrapper){
+        film_create_wrapper.style.display = "none";
+        }
+});
+
+// add film
+btn_add.addEventListener("click", () => {
+  let film_add = {
+    name: name.value,
+    year: +year.value,
+    director: director.value,
+    role: role.value,
+    img: img.value,
+    video: video.value,
+    genre: genre.value,
+    description: description.value,
+  };
+  data.push(film_add);
+});
+console.log(data);
