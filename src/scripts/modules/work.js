@@ -1,4 +1,4 @@
-import { data } from "./film.js";
+import film from "./film.js";
 
 const film_one = `
 <div class="film-name">
@@ -24,6 +24,7 @@ let btn_open = document.querySelector(".film-create-btn-open");
 let film_create_wrapper = document.querySelector(".film-create-wrapper");
 let body = document.querySelector("body");
 let btn_close = document.querySelector(".film-create-btn-close");
+// let film_modal = document.querySelector(".film-one");
 
 let name = document.querySelector(".film-create-name");
 let year = document.querySelector(".film-create-year");
@@ -37,7 +38,7 @@ let btn_add = document.querySelector(".film-create-btn-add");
 
 //film
 function getFilm() {
-  data.forEach((film) => {
+  film.movie.forEach((film) => {
     const kino = document.createElement("div");
     kino.classList.add("film-one");
     kino.innerHTML = film_one;
@@ -58,7 +59,6 @@ function getFilm() {
     film_diretor.innerHTML = `<b>Режиссер:</b> ${film.director}`;
     film_role.innerHTML = `<b>Роли:</b> ${film.role}`;
     film_description.innerHTML = `<b>Описание:</b> ${film.description}`;
-
     const film_data = document.querySelector(".film");
 
     film_data.appendChild(kino);
@@ -73,16 +73,17 @@ btn_open.addEventListener("click", () => {
   body.style.overflow = "hidden";
 });
 
-btn_close.addEventListener("click", () => {
+btn_close.addEventListener("click", ()=> {
   film_create_wrapper.style.display = "none";
   film_create_wrapper.style.opacity = "0";
   body.style.overflow = "auto";
 });
 
 window.addEventListener("click", (event) => {
-    if (event.target == film_create_wrapper){
-        film_create_wrapper.style.display = "none";
-        }
+  if (event.target == film_create_wrapper) {
+    film_create_wrapper.style.display = "none";
+    body.style.overflow = "auto";
+  }
 });
 
 // add film
@@ -97,6 +98,13 @@ btn_add.addEventListener("click", () => {
     genre: genre.value,
     description: description.value,
   };
-  data.push(film_add);
+  // film_modal.innerHTML = "";
+  film.addMovie(film_add);
+  getFilm();
+  function close_modal_window(){
+    film_create_wrapper.style.display = "none";
+    film_create_wrapper.style.opacity = "0";
+    body.style.overflow = "auto";
+  }
+  close_modal_window();
 });
-console.log(data);
