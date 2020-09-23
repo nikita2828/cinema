@@ -106,10 +106,83 @@ body {
 .film-create-btn-wrapper {
   display: flex;
   justify-content: flex-end;
+  margin: 0;
   .film-create-btn{
     margin-left: 5px;
   }
 }
 .film-create-btn-open{
   margin-bottom: 10px;
+}
+
+//search
+.film-search{
+  padding: 0 10px 0 0;
+
+}
+.film-search-input{
+  width: 100%;
+};
+
+@media screen and (max-width: 757px){
+  .description{
+   
+  }
+}
+@media screen and (max-width: 500px){
+  .film-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .img{
+    width: 100%;
+    height: auto;
+  }
+  .change-btn{
+    font-size: 13px;
+    padding: 0;
+  }
+  .delete-btn{
+    font-size: 13px;
+    padding: 0;
+  }
+  .name{
+    font-size: 16px;
+  }
+  .film-search{
+    padding: 0;
+  }
+  .list-group-item{
+    padding: 0;
+  }
+};
+
+@media screen and (max-width: 320px){
+  .film-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .img{
+    width: 100%;
+    height: auto;
+  }
+  .change-btn{
+    font-size: 10px;
+    padding: 0;
+  }
+  .delete-btn{
+    font-size: 10px;
+    padding: 0;
+
+  }
+  .name{
+    font-size: 12px;
+  }
+  .film-search{
+    padding: 0;
+  }
+  .list-group-item{
+    padding: 0;
+    font-size: 13px;
+  }
 }
