@@ -1,4 +1,4 @@
-import film from "./film.js";
+import film from "./data_film.js";
 
 const film_one = `
 <div class="film-name">
@@ -10,14 +10,14 @@ const film_one = `
 </div>
 <div class="film-card">
   <img class="img" width="145px" height="200px" src="" alt="" />
-  <div class="film-info">
+  
     <p class="year"></p>
     <p class="country"></p>
     <p class="genre"></p>
     <p class="director"><p>
     <p class="role"></p>
     <p class="description"></p>
-  </div>
+  
 </div>
 `;
 let btn_open = document.querySelector(".film-create-btn-open");
@@ -32,12 +32,13 @@ let director = document.querySelector(".film-create-director");
 let role = document.querySelector(".film-create-role");
 let img = document.querySelector(".film-create-img");
 let video = document.querySelector(".film-create-video");
-let genre = document.querySelector(".film-genre-input");
+let genre = document.querySelectorAll(".film-genre-input");
 let description = document.querySelector(".film-create-description");
 let btn_add = document.querySelector(".film-create-btn-add");
-
+let film_wrapper = document.querySelector(".film");
 //film
 function getFilm() {
+  film_wrapper.innerHTML = "";
   film.movie.forEach((film) => {
     const kino = document.createElement("div");
     kino.classList.add("film-one");
@@ -69,20 +70,15 @@ getFilm();
 // modal window
 btn_open.addEventListener("click", () => {
   film_create_wrapper.style.display = "block";
-  film_create_wrapper.style.opacity = "1";
-  body.style.overflow = "hidden";
 });
-
-btn_close.addEventListener("click", ()=> {
+const close_handler = () => {
   film_create_wrapper.style.display = "none";
-  film_create_wrapper.style.opacity = "0";
-  body.style.overflow = "auto";
-});
+};
+btn_close.addEventListener("click", close_handler);
 
 window.addEventListener("click", (event) => {
   if (event.target == film_create_wrapper) {
     film_create_wrapper.style.display = "none";
-    body.style.overflow = "auto";
   }
 });
 
@@ -95,16 +91,14 @@ btn_add.addEventListener("click", () => {
     role: role.value,
     img: img.value,
     video: video.value,
-    genre: genre.value,
+    genre: [...genre].map((g) => {
+      if(g.checked){
+        return g.value;
+      }
+    }).filter(Boolean),
     description: description.value,
   };
-  // film_modal.innerHTML = "";
   film.addMovie(film_add);
   getFilm();
-  function close_modal_window(){
-    film_create_wrapper.style.display = "none";
-    film_create_wrapper.style.opacity = "0";
-    body.style.overflow = "auto";
-  }
-  close_modal_window();
+  close_handler();
 });

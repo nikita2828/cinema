@@ -6,7 +6,7 @@ class MovieData {
         name: "Ночной конвой",
         year: "2020",
         country: "Франция, Бельгия",
-        genre: "Драма,Криминал",
+        genre: ["Драма", "Криминал"],
         director: "Анн Фонтен",
         role:
           "Омар Си, Пейман Моаади, Виржини Эфира, Грегори Гадебуа, Аврора Брутен, Нагиса Моримото, Тадрина Хокинг",
@@ -19,7 +19,7 @@ class MovieData {
         id: 2,
         name: "Мулан",
         year: "2020",
-        country: "США, Канада, Гонконг",
+        country:["США","Канада", "Гонконг"],
         genre: "Драмма, Боевик, Фентези",
         director: " Ники Каро",
         role:
@@ -34,7 +34,7 @@ class MovieData {
         name: "Спасти панду",
         year: "2020",
         country: "Южная Корея",
-        genre: "Комедия, Боевик, Фентези",
+        genre: ["Комедия", "Боевик", "Фентези"],
         director: " Ким Тхэ-юн",
         role:
           "Ли Сон-мин, Ингу, Щин Ха-гюн, Ким Со-хён, Пэ Джон-нам, Каль Со-вон, Ли Сон-гюн",
@@ -48,9 +48,7 @@ class MovieData {
   addMovie(data) {
     if (data && data.name) {
       this.movie.push(data);
-    } else {
-      throw Error("You need to pass a cinema");
-    }
+    } 
   }
   editMovie(id, newData) {}
   deleteMovie(id, newData) {}
