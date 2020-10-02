@@ -24,7 +24,6 @@ let btn_open = document.querySelector(".film-create-btn-open");
 let film_create_wrapper = document.querySelector(".film-create-wrapper");
 let body = document.querySelector("body");
 let btn_close = document.querySelector(".film-create-btn-close");
-// let film_modal = document.querySelector(".film-one");
 
 let name = document.querySelector(".film-create-name");
 let year = document.querySelector(".film-create-year");
@@ -83,22 +82,80 @@ window.addEventListener("click", (event) => {
 });
 
 // add film
+
+function add_new_film() {
+  btn_add.addEventListener("click", () => {
+    let film_add = {
+      name: name.value,
+      year: +year.value,
+      director: director.value,
+      role: role.value,
+      img: img.value,
+      video: video.value,
+      genre: [...genre]
+        .map((g) => {
+          if (g.checked) {
+            return g.value;
+          }
+        })
+        .filter(Boolean),
+      description: description.value,
+    };
+    film.addMovie(film_add);
+    getFilm();
+    close_handler();
+  });
+}
+
+//validation
+const check_inputs = [
+  name,
+  year,
+  director,
+  role,
+  img,
+  video,
+  description,
+];
+
+check_inputs.forEach((input) => {
+  input.addEventListener("blur", () => {
+    if (!input.value) {
+      input.style.border = "2px solid rgb(218,18,26)";
+    }
+  });
+  input.addEventListener("blur", () => {
+    if (input.value) {
+      input.style.border = "2px solid rgb(6,144,207)";
+    }
+  });
+});
+
 btn_add.addEventListener("click", () => {
-  let film_add = {
-    name: name.value,
-    year: +year.value,
-    director: director.value,
-    role: role.value,
-    img: img.value,
-    video: video.value,
-    genre: [...genre].map((g) => {
-      if(g.checked){
-        return g.value;
-      }
-    }).filter(Boolean),
-    description: description.value,
-  };
-  film.addMovie(film_add);
-  getFilm();
-  close_handler();
+  check_inputs.forEach((input) => {
+    if(!input.value){
+      input.style.border = "2px solid rgb(218,18,26)";
+    }else if(input.value) {
+      input.style.border = "2px solid rgb(6,144,207)";
+      add_new_film();
+      input.value = "";
+    }else{
+     alert("Everything is bad");
+    }
+  });
+});
+
+//search
+const search = document.querySelector('.film-search-input');
+search.addEventListener('input', (event) => {
+	const { value } = event.target;
+	const filteredResult = film_wrapper.filter((film) => {
+		return film.name.includes(value);
+  });
+  film_wrapper.innerHTML = "";
+  if (!filteredResult.length) {
+		film_wrapper.innerHTML = ' <h1>Извините но совпадений нет</h1>';
+	} else {
+		getFilm(filteredResult);
+	}
 });
