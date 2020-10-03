@@ -17,9 +17,27 @@ let descriptionNode = document.querySelector('.film-create-description');
 let btnAddNode = document.querySelector('.film-create-btn-add');
 let filmWrapperNode = document.querySelector('.film');
 
+// ! validation
+const validIsEmpty = (e) => {
+	const { value, parentNode } = e.target;
+	const errorNode = parentNode.querySelector('.error');
+	if (!value) {
+		errorNode.style.display = 'block';
+	} else {
+		errorNode.style.display = 'none';
+	}
+};
+
+nameNode.addEventListener('blur', validIsEmpty);
+yearNode.addEventListener('blur', validIsEmpty);
+directorNode.addEventListener('blur', validIsEmpty);
+roleNode.addEventListener('blur', validIsEmpty);
+imgNode.addEventListener('blur', validIsEmpty);
+videoNode.addEventListener('blur', validIsEmpty);
+
 //film
 function getFilm() {
-	film_wrapper.innerHTML = '';
+	filmWrapperNode.innerHTML = '';
 	film.movie.forEach((film) => {
 		const kino = document.createElement('div');
 		kino.classList.add('film-one');
