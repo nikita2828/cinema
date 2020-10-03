@@ -18,26 +18,32 @@
           <div>
             <p>Введите название фильма</p>
             <input placeholder="" class="film-create-name" type="text" />
+            <div class="error" id="error_name">The name is required</div>
           </div>
           <div>
             <p>Введите год</p>
             <input class="film-create-year" type="number" />
+            <div class="error" id="error_year">The year is required</div>
           </div>
           <div>
             <p>Введите режиссера</p>
             <input class="film-create-director" type="text" />
+            <div class="error" id="error_director">The director is required</div>
           </div>
           <div>
             <p>Введите актеров</p>
             <input class="film-create-role" type="text" />
+            <div class="error" id="error_actor">The actor is required</div>
           </div>
           <div>
             <p>Введите адрес обложки</p>
             <input class="film-create-img" type="url" />
+            <div class="error" id="error_image">The image url is required</div>
           </div>
           <div>
             <p>Введите адрес трейлера</p>
             <input class="film-create-video" type="url" />
+            <div class="error" id="error_video">The vieo link is required</div>
           </div>
         </div>
 
@@ -197,8 +203,10 @@
             >
           </div>
         </div>
+        <div class="error" id="error_ganre">The ganre is required</div>
         <p>Введите описание</p>
         <textarea class="film-create-description" rows="3"></textarea>
+        <div class="error" id="error_description">The description is required</div>
         <div class="film-create-btn-wrapper">
           <button
             class="film-create-btn film-create-btn-add btn btn-outline-success"
