@@ -12,7 +12,7 @@ let directorNode = document.querySelector('.film-create-director');
 let roleNode = document.querySelector('.film-create-role');
 let imgNode = document.querySelector('.film-create-img');
 let videoNode = document.querySelector('.film-create-video');
-let genreNode = document.querySelectorAll('.film-genre-input');
+let genresNode = document.querySelectorAll('.film-genre-input');
 let descriptionNode = document.querySelector('.film-create-description');
 let btnAddNode = document.querySelector('.film-create-btn-add');
 let filmWrapperNode = document.querySelector('.film');
@@ -28,12 +28,29 @@ const validIsEmpty = (e) => {
 	}
 };
 
+const validCheckboxes = (e) => {
+	const isChecked = [...genresNode].some((c) => c.checked);
+
+	const errorGanreNode = document.getElementById('error_ganre');
+	if (!isChecked) {
+		errorGanreNode.style.display = 'block';
+	} else {
+		errorGanreNode.style.display = 'none';
+	}
+};
+
 nameNode.addEventListener('blur', validIsEmpty);
 yearNode.addEventListener('blur', validIsEmpty);
 directorNode.addEventListener('blur', validIsEmpty);
 roleNode.addEventListener('blur', validIsEmpty);
 imgNode.addEventListener('blur', validIsEmpty);
 videoNode.addEventListener('blur', validIsEmpty);
+descriptionNode.addEventListener('blur', validIsEmpty);
+
+btnAddNode.addEventListener('click', () => {
+	validCheckboxes();
+	console.warn('CREATE_MOVIE');
+});
 
 //film
 function getFilm() {
