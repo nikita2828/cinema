@@ -18,8 +18,8 @@ let btnAddNode = document.querySelector('.film-create-btn-add');
 let filmWrapperNode = document.querySelector('.film');
 
 // ! validation
-const validIsEmpty = (e) => {
-	const { value, parentNode } = e.target;
+const validIsEmpty = (e, node) => {
+	const { value, parentNode } = e ? e.target : node;
 	const errorNode = parentNode.querySelector('.error');
 	if (!value) {
 		errorNode.style.display = 'block';
@@ -49,7 +49,9 @@ descriptionNode.addEventListener('blur', validIsEmpty);
 
 btnAddNode.addEventListener('click', () => {
 	validCheckboxes();
-	console.warn('CREATE_MOVIE');
+	[nameNode, yearNode, directorNode, roleNode, imgNode, videoNode, descriptionNode].forEach((node) => {
+		validIsEmpty(null, node);
+	});
 });
 
 //film
