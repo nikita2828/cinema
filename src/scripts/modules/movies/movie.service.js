@@ -1,21 +1,21 @@
-import film from './data.js';
-import { film_one } from './movie.template';
+import film from "./data.js";
+import { film_one } from "./movie.template";
 
-let btn_open = document.querySelector('.film-create-btn-open');
-let film_create_wrapper = document.querySelector('.film-create-wrapper');
-let body = document.querySelector('body');
-let btn_close = document.querySelector('.film-create-btn-close');
+let btn_open = document.querySelector(".film-create-btn-open");
+let film_create_wrapper = document.querySelector(".film-create-wrapper");
+let body = document.querySelector("body");
+let btn_close = document.querySelector(".film-create-btn-close");
 
-let nameNode = document.querySelector('.film-create-name');
-let yearNode = document.querySelector('.film-create-year');
-let directorNode = document.querySelector('.film-create-director');
-let roleNode = document.querySelector('.film-create-role');
-let imgNode = document.querySelector('.film-create-img');
-let videoNode = document.querySelector('.film-create-video');
-let genresNode = document.querySelectorAll('.film-genre-input');
-let descriptionNode = document.querySelector('.film-create-description');
-let btnAddNode = document.querySelector('.film-create-btn-add');
-let filmWrapperNode = document.querySelector('.film');
+let nameNode = document.querySelector(".film-create-name");
+let yearNode = document.querySelector(".film-create-year");
+let directorNode = document.querySelector(".film-create-director");
+let roleNode = document.querySelector(".film-create-role");
+let imgNode = document.querySelector(".film-create-img");
+let videoNode = document.querySelector(".film-create-video");
+let genresNode = document.querySelectorAll(".film-genre-input");
+let descriptionNode = document.querySelector(".film-create-description");
+let btnAddNode = document.querySelector(".film-create-btn-add");
+let filmWrapperNode = document.querySelector(".film");
 
 // ! validation
 const validIsEmpty = (e, node) => {
@@ -48,69 +48,112 @@ videoNode.addEventListener('blur', validIsEmpty);
 descriptionNode.addEventListener('blur', validIsEmpty);
 
 btnAddNode.addEventListener('click', () => {
-	validCheckboxes();
-	[nameNode, yearNode, directorNode, roleNode, imgNode, videoNode, descriptionNode].forEach((node) => {
-		validIsEmpty(null, node);
-	});
+	const isValue = [nameNode, yearNode, directorNode, roleNode, imgNode, videoNode, descriptionNode].every((i) => i.value);
+
+	const isChe = [...genresNode].some((che) => che.checked);
+	
+	if(!isChe || !isValue){
+		validCheckboxes();
+		[nameNode, yearNode, directorNode, roleNode, imgNode, videoNode, descriptionNode].forEach((node) => {
+			validIsEmpty(null, node);
+		});
+	}else if (isChe && isValue){
+		render_film();
+	}
 });
+
+//film render
+function render_film(){
+		let film_add = {
+		  nameNode: nameNode.value,
+		  yearNode: +yearNode.value,
+		  directorNode: directorNode.value,
+		  roleNode: roleNode.value,
+		  imgNode: imgNode.value,
+		  videoNode: videoNode.value,
+		  genresNode: [...genresNode]
+			.map((c) => {
+			  if (c.checked) {
+				return c.value;
+			  }
+			})
+			.filter(Boolean),
+		  descriptionNode: descriptionNode.value,
+		};
+		film.addMovie(film_add);
+		getFilm();
+		close_handler();
+}
+
 
 //film
 function getFilm() {
-	filmWrapperNode.innerHTML = '';
-	film.movie.forEach((film) => {
-		const kino = document.createElement('div');
-		kino.classList.add('film-one');
-		kino.innerHTML = film_one;
-		const film_name = kino.querySelector('.name');
-		const film_img = kino.querySelector('.img');
-		const film_year = kino.querySelector('.year');
-		const film_country = kino.querySelector('.country');
-		const film_genre = kino.querySelector('.genre');
-		const film_diretor = kino.querySelector('.director');
-		const film_role = kino.querySelector('.role');
-		const film_description = kino.querySelector('.description');
+  filmWrapperNode.innerHTML = "";
+  film.movie.forEach((film) => {
+    const kino = document.createElement("div");
+    kino.classList.add("film-one");
+    kino.innerHTML = film_one;
+    const film_name = kino.querySelector(".name");
+    const film_img = kino.querySelector(".img");
+    const film_year = kino.querySelector(".year");
+    const film_country = kino.querySelector(".country");
+    const film_genre = kino.querySelector(".genre");
+    const film_diretor = kino.querySelector(".director");
+    const film_role = kino.querySelector(".role");
+    const film_description = kino.querySelector(".description");
 
-		film_name.innerText = `${film.name}`;
-		film_img.setAttribute('src', film.img);
-		film_year.innerHTML = `<b>Год:</b> ${film.year}`;
-		film_country.innerHTML = `<b>Страна:</b> ${film.country}`;
-		film_genre.innerHTML = `<b>Жанр:</b> ${film.genre}`;
-		film_diretor.innerHTML = `<b>Режиссер:</b> ${film.director}`;
-		film_role.innerHTML = `<b>Роли:</b> ${film.role}`;
-		film_description.innerHTML = `<b>Описание:</b> ${film.description}`;
-		const film_data = document.querySelector('.film');
+    film_name.innerText = `${film.nameNode}`;
+    film_img.setAttribute("src", film.imgNode);
+    film_year.innerHTML = `<b>Год:</b> ${film.yearNode}`;
+    film_country.innerHTML = `<b>Страна:</b> ${film.countryNode}`;
+    film_genre.innerHTML = `<b>Жанр:</b> ${film.genresNode}`;
+    film_diretor.innerHTML = `<b>Режиссер:</b> ${film.directorNode}`;
+    film_role.innerHTML = `<b>Роли:</b> ${film.roleNode}`;
+    film_description.innerHTML = `<b>Описание:</b> ${film.descriptionNode}`;
+    const film_data = document.querySelector(".film");
 
-		film_data.appendChild(kino);
-	});
+    film_data.appendChild(kino);
+  });
 }
 getFilm();
 
 // modal window
-btn_open.addEventListener('click', () => {
-	film_create_wrapper.style.display = 'block';
+btn_open.addEventListener("click", () => {
+  film_create_wrapper.style.display = "block";
 });
 const close_handler = () => {
-	film_create_wrapper.style.display = 'none';
+  film_create_wrapper.style.display = "none";
+  let inputs = [nameNode, yearNode, directorNode, roleNode, imgNode, videoNode,descriptionNode];
+  inputs.forEach((input) => {
+	  input.value = "";
+  });
+  [...genresNode]
+      .map((c) => {
+        if (c.checked) {
+          c.checked = false;
+        }
+      });
 };
-btn_close.addEventListener('click', close_handler);
 
-window.addEventListener('click', (event) => {
-	if (event.target == film_create_wrapper) {
-		film_create_wrapper.style.display = 'none';
-	}
+btn_close.addEventListener("click", close_handler);
+
+window.addEventListener("click", (event) => {
+  if (event.target == film_create_wrapper) {
+    film_create_wrapper.style.display = "none";
+  }
 });
 
 //search
-const search = document.querySelector('.film-search-input');
-search.addEventListener('input', (event) => {
-	const { value } = event.target;
-	const filteredResult = film_wrapper.filter((film) => {
-		return film.name.includes(value);
-	});
-	film_wrapper.innerHTML = '';
-	if (!filteredResult.length) {
-		film_wrapper.innerHTML = ' <h1>Извините но совпадений нет</h1>';
-	} else {
-		getFilm(filteredResult);
-	}
+const search = document.querySelector(".film-search-input");
+search.addEventListener("input", (event) => {
+  const { value } = event.target;
+  const filteredResult = film_wrapper.filter((film) => {
+    return film.name.includes(value);
+  });
+  film_wrapper.innerHTML = "";
+  if (!filteredResult.length) {
+    film_wrapper.innerHTML = " <h1>Извините но совпадений нет</h1>";
+  } else {
+    getFilm(filteredResult);
+  }
 });
