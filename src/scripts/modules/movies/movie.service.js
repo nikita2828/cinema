@@ -17,6 +17,16 @@ let descriptionNode = document.querySelector(".film-create-description");
 let btnAddNode = document.querySelector(".film-create-btn-add");
 let filmWrapperNode = document.querySelector(".film");
 
+let error_name = document.querySelector("#error_name");
+let error_year = document.querySelector("#error_year");
+let error_director = document.querySelector("#error_director");
+let error_actor = document.querySelector("#error_actor");
+let error_image = document.querySelector("#error_image");
+let error_video = document.querySelector("#error_video");
+let error_description = document.querySelector("#error_description");
+let errors = [error_name, error_year, error_director, error_actor, error_image, error_video, error_description];
+const errorGanreNode = document.getElementById('error_ganre');
+
 // ! validation
 const validIsEmpty = (e, node) => {
 	const { value, parentNode } = e ? e.target : node;
@@ -25,13 +35,14 @@ const validIsEmpty = (e, node) => {
 		errorNode.style.display = 'block';
 	} else {
 		errorNode.style.display = 'none';
+
 	}
 };
 
 const validCheckboxes = (e) => {
 	const isChecked = [...genresNode].some((c) => c.checked);
 
-	const errorGanreNode = document.getElementById('error_ganre');
+	// const errorGanreNode = document.getElementById('error_ganre');
 	if (!isChecked) {
 		errorGanreNode.style.display = 'block';
 	} else {
@@ -123,6 +134,9 @@ btn_open.addEventListener("click", () => {
 });
 const close_handler = () => {
   film_create_wrapper.style.display = "none";
+	errors.forEach((e) => e.style.display = "none");
+	errorGanreNode.style.display = 'none';
+
   let inputs = [nameNode, yearNode, directorNode, roleNode, imgNode, videoNode,descriptionNode];
   inputs.forEach((input) => {
 	  input.value = "";
@@ -139,7 +153,9 @@ btn_close.addEventListener("click", close_handler);
 
 window.addEventListener("click", (event) => {
   if (event.target == film_create_wrapper) {
-    film_create_wrapper.style.display = "none";
+	film_create_wrapper.style.display = "none";
+	errorGanreNode.style.display = 'none';
+	errors.forEach((e) => e.style.display = "none");
   }
 });
 
