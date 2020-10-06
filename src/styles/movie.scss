@@ -100,6 +100,13 @@
 .film-create-description {
 	width: 100%;
 }
+.film-create-description-div{
+	margin-top: 10px;
+	p{
+		padding: 0;
+		margin: 0;
+	}
+}
 .film-create-btn-wrapper {
 	display: flex;
 	justify-content: flex-end;

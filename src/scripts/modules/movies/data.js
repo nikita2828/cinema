@@ -51,7 +51,9 @@ class MovieData {
     } 
   }
   editMovie(id, newData) {}
-  deleteMovie(id, newData) {}
+  deleteMovie(id, newData) {
+    
+  }
 }
 
 const moviedata = new MovieData();

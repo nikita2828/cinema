@@ -7,6 +7,7 @@ let body = document.querySelector("body");
 let btn_close = document.querySelector(".film-create-btn-close");
 
 let nameNode = document.querySelector(".film-create-name");
+let countryNode = document.querySelector(".film-create-country");
 let yearNode = document.querySelector(".film-create-year");
 let directorNode = document.querySelector(".film-create-director");
 let roleNode = document.querySelector(".film-create-role");
@@ -16,86 +17,125 @@ let genresNode = document.querySelectorAll(".film-genre-input");
 let descriptionNode = document.querySelector(".film-create-description");
 let btnAddNode = document.querySelector(".film-create-btn-add");
 let filmWrapperNode = document.querySelector(".film");
+let allInputs = [
+  nameNode,
+  countryNode,
+  yearNode,
+  directorNode,
+  roleNode,
+  imgNode,
+  videoNode,
+  descriptionNode,
+];
 
 let error_name = document.querySelector("#error_name");
+let error_country = document.querySelector("#error_country");
 let error_year = document.querySelector("#error_year");
 let error_director = document.querySelector("#error_director");
 let error_actor = document.querySelector("#error_actor");
 let error_image = document.querySelector("#error_image");
 let error_video = document.querySelector("#error_video");
 let error_description = document.querySelector("#error_description");
-let errors = [error_name, error_year, error_director, error_actor, error_image, error_video, error_description];
-const errorGanreNode = document.getElementById('error_ganre');
+let errors = [
+  error_name,
+  error_country,
+  error_year,
+  error_director,
+  error_actor,
+  error_image,
+  error_video,
+  error_description,
+];
+const errorGanreNode = document.getElementById("error_ganre");
+
+let btn_delete = document.querySelector(".delete-btn");
 
 // ! validation
 const validIsEmpty = (e, node) => {
-	const { value, parentNode } = e ? e.target : node;
-	const errorNode = parentNode.querySelector('.error');
-	if (!value) {
-		errorNode.style.display = 'block';
-	} else {
-		errorNode.style.display = 'none';
-
-	}
+  const { value, parentNode } = e ? e.target : node;
+  const errorNode = parentNode.querySelector(".error");
+  if (!value) {
+    errorNode.style.display = "block";
+  } else {
+    errorNode.style.display = "none";
+  }
 };
 
 const validCheckboxes = (e) => {
-	const isChecked = [...genresNode].some((c) => c.checked);
+  const isChecked = [...genresNode].some((c) => c.checked);
 
-	// const errorGanreNode = document.getElementById('error_ganre');
-	if (!isChecked) {
-		errorGanreNode.style.display = 'block';
-	} else {
-		errorGanreNode.style.display = 'none';
-	}
+  if (!isChecked) {
+    errorGanreNode.style.display = "block";
+  } else {
+    errorGanreNode.style.display = "none";
+  }
 };
 
-nameNode.addEventListener('blur', validIsEmpty);
-yearNode.addEventListener('blur', validIsEmpty);
-directorNode.addEventListener('blur', validIsEmpty);
-roleNode.addEventListener('blur', validIsEmpty);
-imgNode.addEventListener('blur', validIsEmpty);
-videoNode.addEventListener('blur', validIsEmpty);
-descriptionNode.addEventListener('blur', validIsEmpty);
+nameNode.addEventListener("blur", validIsEmpty);
+countryNode.addEventListener("blur", validIsEmpty);
+yearNode.addEventListener("blur", validIsEmpty);
+directorNode.addEventListener("blur", validIsEmpty);
+roleNode.addEventListener("blur", validIsEmpty);
+imgNode.addEventListener("blur", validIsEmpty);
+videoNode.addEventListener("blur", validIsEmpty);
+descriptionNode.addEventListener("blur", validIsEmpty);
 
-btnAddNode.addEventListener('click', () => {
-	const isValue = [nameNode, yearNode, directorNode, roleNode, imgNode, videoNode, descriptionNode].every((i) => i.value);
+btnAddNode.addEventListener("click", () => {
+  const isValue = [
+    nameNode,
+    countryNode,
+    yearNode,
+    directorNode,
+    roleNode,
+    imgNode,
+    videoNode,
+    descriptionNode,
+  ].every((i) => i.value);
 
-	const isChe = [...genresNode].some((che) => che.checked);
-	
-	if(!isChe || !isValue){
-		validCheckboxes();
-		[nameNode, yearNode, directorNode, roleNode, imgNode, videoNode, descriptionNode].forEach((node) => {
-			validIsEmpty(null, node);
-		});
-	}else if (isChe && isValue){
-		render_film();
-	}
+  const isChe = [...genresNode].some((che) => che.checked);
+
+  if (!isChe || !isValue) {
+    validCheckboxes();
+    [
+      nameNode,
+      countryNode,
+      yearNode,
+      directorNode,
+      roleNode,
+      imgNode,
+      videoNode,
+      descriptionNode,
+    ].forEach((node) => {
+      validIsEmpty(null, node);
+    });
+  } else if (isChe && isValue) {
+    render_film();
+  }
 });
 
 //film render
-function render_film(){
-		let film_add = {
-		  nameNode: nameNode.value,
-		  yearNode: +yearNode.value,
-		  directorNode: directorNode.value,
-		  roleNode: roleNode.value,
-		  imgNode: imgNode.value,
-		  videoNode: videoNode.value,
-		  genresNode: [...genresNode]
-			.map((c) => {
-			  if (c.checked) {
-				return c.value;
-			  }
-			})
-			.filter(Boolean),
-		  descriptionNode: descriptionNode.value,
-		};
-		film.addMovie(film_add);
-		getFilm();
-		close_handler();
+function render_film() {
+  let film_add = {
+    nameNode: nameNode.value,
+    countryNode: countryNode.value,
+    yearNode: +yearNode.value,
+    directorNode: directorNode.value,
+    roleNode: roleNode.value,
+    imgNode: imgNode.value,
+    videoNode: videoNode.value,
+    genresNode: [...genresNode]
+      .map((c) => {
+        if (c.checked) {
+          return c.value;
+        }
+      })
+      .filter(Boolean),
+    descriptionNode: descriptionNode.value,
+  };
+  film.addMovie(film_add);
+  getFilm();
+  close_handler();
 }
-
 
 //film
 function getFilm() {
@@ -134,36 +174,42 @@ btn_open.addEventListener("click", () => {
 });
 const close_handler = () => {
   film_create_wrapper.style.display = "none";
-	errors.forEach((e) => e.style.display = "none");
-	errorGanreNode.style.display = 'none';
+  errors.forEach((e) => (e.style.display = "none"));
+  errorGanreNode.style.display = "none";
 
-  let inputs = [nameNode, yearNode, directorNode, roleNode, imgNode, videoNode,descriptionNode];
+  let inputs = [
+    nameNode,
+    countryNode,
+    yearNode,
+    directorNode,
+    roleNode,
+    imgNode,
+    videoNode,
+    descriptionNode,
+  ];
   inputs.forEach((input) => {
-	  input.value = "";
+    input.value = "";
   });
-  [...genresNode]
-      .map((c) => {
-        if (c.checked) {
-          c.checked = false;
-        }
-      });
+  [...genresNode].map((c) => {
+    if (c.checked) {
+      c.checked = false;
+    }
+  });
 };
 
 btn_close.addEventListener("click", close_handler);
-
 window.addEventListener("click", (event) => {
   if (event.target == film_create_wrapper) {
-	film_create_wrapper.style.display = "none";
-	errorGanreNode.style.display = 'none';
-	errors.forEach((e) => e.style.display = "none");
+    close_handler();
   }
 });
 
 //search
 const search = document.querySelector(".film-search-input");
+let filmsData = [];
 search.addEventListener("input", (event) => {
   const { value } = event.target;
-  const filteredResult = film_wrapper.filter((film) => {
+  const filteredResult = filmsData.filter((film) => {
     return film.name.includes(value);
   });
   film_wrapper.innerHTML = "";
@@ -172,4 +218,9 @@ search.addEventListener("input", (event) => {
   } else {
     getFilm(filteredResult);
   }
+});
+
+//delete
+btn_delete.addEventListener("click", () => {
+  console.log("hiii");
 });
