@@ -205,22 +205,23 @@ window.addEventListener("click", (event) => {
 });
 
 //search
-const search = document.querySelector(".film-search-input");
-let filmsData = [];
-search.addEventListener("input", (event) => {
-  const { value } = event.target;
-  const filteredResult = filmsData.filter((film) => {
-    return film.name.includes(value);
-  });
-  film_wrapper.innerHTML = "";
-  if (!filteredResult.length) {
-    film_wrapper.innerHTML = " <h1>Извините но совпадений нет</h1>";
-  } else {
-    getFilm(filteredResult);
+let search = document.querySelector(".film-search-input");
+search.addEventListener("keyup", () => {
+  let filter = search.value.toUpperCase();
+  console.log(filter);
+  let filmNames = filmWrapperNode.querySelectorAll(".film-one");
+  for (let i = 0; i < filmNames.length; i++) {
+    let names = filmNames[i].querySelectorAll(".name")[0];
+    console.log(names);
+    if (names.innerHTML.toUpperCase().indexOf(filter) > -1) {
+      filmNames[i].style.display = "";
+    } else {
+      filmNames[i].style.display = "none";
+    }
   }
 });
 
 //delete
-btn_delete.addEventListener("click", () => {
-  console.log("hiii");
-});
+// btn_delete.addEventListener("click", () => {
+//   console.log("hiii");
+// });
