@@ -115,7 +115,7 @@ btnAddNode.addEventListener("click", () => {
 });
 
 //film render
-function render_film() {
+const render_film = () => {
   let film_add = {
     nameNode: nameNode.value,
     countryNode: countryNode.value,
@@ -142,10 +142,10 @@ function render_film() {
   })
   .then(getFilm)
   .then(close_handler);
-}
+};
 
-//film render
-function put_film() {
+//film put
+function put_film(id) {
   let film_add = {
     nameNode: nameNode.value,
     countryNode: countryNode.value,
@@ -232,9 +232,8 @@ const change_handler = (film) => {
   });
 
   descriptionNode.value = film.descriptionNode;
-  
  let btnAddNodeForPut = document.querySelector(".film-create-btn-add");
-  btnAddNodeForPut.addEventListener("click", put_film);
+  btnAddNodeForPut.addEventListener("click",() => put_film(film.id));
 };
 //delete
 const delete_handler = (id) => {
