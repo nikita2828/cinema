@@ -49,14 +49,7 @@ let errors = [
 ];
 const errorGanreNode = document.getElementById("error_ganre");
 
-let btn_delete = document.querySelectorAll(".delete-btn");
-//delete
 
-btn_delete.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    console.log("CLICK");
-  });
-});
 
 // ! validation
 const validIsEmpty = (e, node) => {
@@ -151,6 +144,36 @@ function render_film() {
   .then(close_handler);
 }
 
+//film render
+function put_film() {
+  let film_add = {
+    nameNode: nameNode.value,
+    countryNode: countryNode.value,
+    yearNode: +yearNode.value,
+    directorNode: directorNode.value,
+    roleNode: roleNode.value,
+    imgNode: imgNode.value,
+    videoNode: videoNode.value,
+    genresNode: [...genresNode]
+      .map((c) => {
+        if (c.checked) {
+          return c.value;
+        }
+      })
+      .filter(Boolean),
+    descriptionNode: descriptionNode.value,
+  };
+  fetch(`${MY_URL}/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(film_add),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  .then(getFilm)
+  .then(close_handler);
+}
+
 //film
 function getFilm() {
   filmWrapperNode.innerHTML = "";
@@ -179,18 +202,53 @@ function getFilm() {
       film_role.innerHTML = `<b>Роли:</b> ${film.roleNode}`;
       film_description.innerHTML = `<b>Описание:</b> ${film.descriptionNode}`;
       const film_data = document.querySelector(".film");
-  
+      
       film_data.appendChild(kino);
+      kino.querySelector(".delete-btn").addEventListener("click", () => delete_handler(film.id));
+      kino.querySelector(".change-btn").addEventListener("click", () => change_handler(film));
   
   });
 });
 }
 getFilm();
+//change
+const change_handler = (film) => {
+  open_handler();
+  nameNode.value = film.nameNode;
+  countryNode.value = film.countryNode;
+  yearNode.value = film.yearNode;
+  directorNode.value = film.directorNode;
+  roleNode.value = film.roleNode;
+  imgNode.value = film.imgNode;
+
+  genresNode.forEach((gn) => {
+    film.genresNode.forEach((genres) => {
+    if(genres == gn.value){
+      if(true){
+        gn.checked = true;
+      }
+    }
+    });
+  });
+
+  descriptionNode.value = film.descriptionNode;
+  
+ let btnAddNodeForPut = document.querySelector(".film-create-btn-add");
+  btnAddNodeForPut.addEventListener("click", put_film);
+};
+//delete
+const delete_handler = (id) => {
+  fetch(`${MY_URL}/${id}`, {
+		method: 'DELETE',
+  })
+  .then(getFilm);
+};
 
 // modal window
-btn_open.addEventListener("click", () => {
-  film_create_wrapper.style.display = "block";
-});
+const open_handler = () => {
+    film_create_wrapper.style.display = "block";
+};
+btn_open.addEventListener("click", open_handler);
 const close_handler = () => {
   film_create_wrapper.style.display = "none";
   errors.forEach((e) => (e.style.display = "none"));
