@@ -1,5 +1,6 @@
-import film from "./data.js";
 import { film_one } from "./movie.template";
+
+const MY_URL = "http://localhost:3003/movie";
 
 let btn_open = document.querySelector(".film-create-btn-open");
 let film_create_wrapper = document.querySelector(".film-create-wrapper");
@@ -48,7 +49,14 @@ let errors = [
 ];
 const errorGanreNode = document.getElementById("error_ganre");
 
-let btn_delete = document.querySelector(".delete-btn");
+let btn_delete = document.querySelectorAll(".delete-btn");
+//delete
+
+btn_delete.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    console.log("CLICK");
+  });
+});
 
 // ! validation
 const validIsEmpty = (e, node) => {
@@ -132,39 +140,50 @@ function render_film() {
       .filter(Boolean),
     descriptionNode: descriptionNode.value,
   };
-  film.addMovie(film_add);
-  getFilm();
-  close_handler();
+  fetch(MY_URL, {
+    method: 'POST',
+    body: JSON.stringify(film_add),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  .then(getFilm)
+  .then(close_handler);
 }
 
 //film
 function getFilm() {
   filmWrapperNode.innerHTML = "";
-  film.movie.forEach((film) => {
-    const kino = document.createElement("div");
-    kino.classList.add("film-one");
-    kino.innerHTML = film_one;
-    const film_name = kino.querySelector(".name");
-    const film_img = kino.querySelector(".img");
-    const film_year = kino.querySelector(".year");
-    const film_country = kino.querySelector(".country");
-    const film_genre = kino.querySelector(".genre");
-    const film_diretor = kino.querySelector(".director");
-    const film_role = kino.querySelector(".role");
-    const film_description = kino.querySelector(".description");
-
-    film_name.innerText = `${film.nameNode}`;
-    film_img.setAttribute("src", film.imgNode);
-    film_year.innerHTML = `<b>Год:</b> ${film.yearNode}`;
-    film_country.innerHTML = `<b>Страна:</b> ${film.countryNode}`;
-    film_genre.innerHTML = `<b>Жанр:</b> ${film.genresNode}`;
-    film_diretor.innerHTML = `<b>Режиссер:</b> ${film.directorNode}`;
-    film_role.innerHTML = `<b>Роли:</b> ${film.roleNode}`;
-    film_description.innerHTML = `<b>Описание:</b> ${film.descriptionNode}`;
-    const film_data = document.querySelector(".film");
-
-    film_data.appendChild(kino);
+   fetch(MY_URL)
+  .then((response) => response.json())
+  .then((movie) => {
+    movie.forEach((film) => {
+      const kino = document.createElement("div");
+      kino.classList.add("film-one");
+      kino.innerHTML = film_one;
+      const film_name = kino.querySelector(".name");
+      const film_img = kino.querySelector(".img");
+      const film_year = kino.querySelector(".year");
+      const film_country = kino.querySelector(".country");
+      const film_genre = kino.querySelector(".genre");
+      const film_diretor = kino.querySelector(".director");
+      const film_role = kino.querySelector(".role");
+      const film_description = kino.querySelector(".description");
+  
+      film_name.innerText = `${film.nameNode}`;
+      film_img.setAttribute("src", film.imgNode);
+      film_year.innerHTML = `<b>Год:</b> ${film.yearNode}`;
+      film_country.innerHTML = `<b>Страна:</b> ${film.countryNode}`;
+      film_genre.innerHTML = `<b>Жанр:</b> ${film.genresNode}`;
+      film_diretor.innerHTML = `<b>Режиссер:</b> ${film.directorNode}`;
+      film_role.innerHTML = `<b>Роли:</b> ${film.roleNode}`;
+      film_description.innerHTML = `<b>Описание:</b> ${film.descriptionNode}`;
+      const film_data = document.querySelector(".film");
+  
+      film_data.appendChild(kino);
+  
   });
+});
 }
 getFilm();
 
@@ -221,7 +240,5 @@ search.addEventListener("keyup", () => {
   }
 });
 
-//delete
-// btn_delete.addEventListener("click", () => {
-//   console.log("hiii");
-// });
+
+
