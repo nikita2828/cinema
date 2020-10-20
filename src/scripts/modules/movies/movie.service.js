@@ -17,6 +17,7 @@ let videoNode = document.querySelector(".film-create-video");
 let genresNode = document.querySelectorAll(".film-genre-input");
 let descriptionNode = document.querySelector(".film-create-description");
 let btnAddNode = document.querySelector(".film-create-btn-add");
+let btnChangeNode = document.querySelector(".film-create-btn-change");
 let filmWrapperNode = document.querySelector(".film");
 let allInputs = [
   nameNode,
@@ -214,6 +215,8 @@ getFilm();
 //change
 const change_handler = (film) => {
   open_handler();
+  btnAddNode.style.display = "none";
+  btnChangeNode.style.display = "block";
   nameNode.value = film.nameNode;
   countryNode.value = film.countryNode;
   yearNode.value = film.yearNode;
@@ -232,8 +235,7 @@ const change_handler = (film) => {
   });
 
   descriptionNode.value = film.descriptionNode;
- let btnAddNodeForPut = document.querySelector(".film-create-btn-add");
-  btnAddNodeForPut.addEventListener("click",() => put_film(film.id));
+  btnChangeNode.addEventListener("click",() => put_film(film.id));
 };
 //delete
 const delete_handler = (id) => {
@@ -249,6 +251,8 @@ const open_handler = () => {
 };
 btn_open.addEventListener("click", open_handler);
 const close_handler = () => {
+  btnAddNode.style.display = "block";
+  btnChangeNode.style.display = "none";
   film_create_wrapper.style.display = "none";
   errors.forEach((e) => (e.style.display = "none"));
   errorGanreNode.style.display = "none";
