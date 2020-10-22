@@ -50,7 +50,85 @@ let errors = [
 ];
 const errorGanreNode = document.getElementById("error_ganre");
 
+//get film
+function getFilm() {
+  filmWrapperNode.innerHTML = "";
+   fetch(MY_URL)
+  .then((response) => response.json())
+  .then((movie) => {
+    movie.forEach((film) => {
+      const kino = document.createElement("div");
+      kino.classList.add("film-one");
+      kino.innerHTML = film_one;
+      const film_name = kino.querySelector(".name");
+      const film_img = kino.querySelector(".img");
+      const film_year = kino.querySelector(".year");
+      const film_country = kino.querySelector(".country");
+      const film_genre = kino.querySelector(".genre");
+      const film_diretor = kino.querySelector(".director");
+      const film_role = kino.querySelector(".role");
+      const film_description = kino.querySelector(".description");
+  
+      film_name.innerText = `${film.nameNode}`;
+      film_img.setAttribute("src", film.imgNode);
+      film_year.innerHTML = `<b>Год:</b> ${film.yearNode}`;
+      film_country.innerHTML = `<b>Страна:</b> ${film.countryNode}`;
+      film_genre.innerHTML = `<b>Жанр:</b> ${film.genresNode}`;
+      film_diretor.innerHTML = `<b>Режиссер:</b> ${film.directorNode}`;
+      film_role.innerHTML = `<b>Роли:</b> ${film.roleNode}`;
+      film_description.innerHTML = `<b>Описание:</b> ${film.descriptionNode}`;
+      const film_data = document.querySelector(".film");
+      
+      film_data.appendChild(kino);
+      kino.querySelector(".delete-btn").addEventListener("click", () => delete_handler(film.id));
+      const changeBtn = kino.querySelector(".change-btn");
+      changeBtn.addEventListener("click", () => change_handler(film));
+     
+  });
+});
+}
+getFilm();
 
+
+// modal window
+const open_handler = () => {
+  film_create_wrapper.style.display = "block";
+};
+btn_open.addEventListener("click", open_handler);
+
+const close_handler = () => {
+btnAddNode.style.display = "block";
+btnChangeNode.style.display = "none";
+film_create_wrapper.style.display = "none";
+errors.forEach((e) => (e.style.display = "none"));
+errorGanreNode.style.display = "none";
+
+let inputs = [
+  nameNode,
+  countryNode,
+  yearNode,
+  directorNode,
+  roleNode,
+  imgNode,
+  videoNode,
+  descriptionNode,
+];
+inputs.forEach((input) => {
+  input.value = "";
+});
+[...genresNode].map((c) => {
+  if (c.checked) {
+    c.checked = false;
+  }
+});
+};
+btn_close.addEventListener("click", close_handler);
+
+window.addEventListener("click", (event) => {
+if (event.target == film_create_wrapper) {
+  close_handler();
+}
+});
 
 // ! validation
 const validIsEmpty = (e, node) => {
@@ -145,73 +223,6 @@ const render_film = () => {
   .then(close_handler);
 };
 
-//film put
-function put_film(id) {
-  let film_add = {
-    nameNode: nameNode.value,
-    countryNode: countryNode.value,
-    yearNode: +yearNode.value,
-    directorNode: directorNode.value,
-    roleNode: roleNode.value,
-    imgNode: imgNode.value,
-    videoNode: videoNode.value,
-    genresNode: [...genresNode]
-      .map((c) => {
-        if (c.checked) {
-          return c.value;
-        }
-      })
-      .filter(Boolean),
-    descriptionNode: descriptionNode.value,
-  };
-  fetch(`${MY_URL}/${id}`, {
-    method: 'PUT',
-    body: JSON.stringify(film_add),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  .then(getFilm)
-  .then(close_handler);
-}
-
-//film
-function getFilm() {
-  filmWrapperNode.innerHTML = "";
-   fetch(MY_URL)
-  .then((response) => response.json())
-  .then((movie) => {
-    movie.forEach((film) => {
-      const kino = document.createElement("div");
-      kino.classList.add("film-one");
-      kino.innerHTML = film_one;
-      const film_name = kino.querySelector(".name");
-      const film_img = kino.querySelector(".img");
-      const film_year = kino.querySelector(".year");
-      const film_country = kino.querySelector(".country");
-      const film_genre = kino.querySelector(".genre");
-      const film_diretor = kino.querySelector(".director");
-      const film_role = kino.querySelector(".role");
-      const film_description = kino.querySelector(".description");
-  
-      film_name.innerText = `${film.nameNode}`;
-      film_img.setAttribute("src", film.imgNode);
-      film_year.innerHTML = `<b>Год:</b> ${film.yearNode}`;
-      film_country.innerHTML = `<b>Страна:</b> ${film.countryNode}`;
-      film_genre.innerHTML = `<b>Жанр:</b> ${film.genresNode}`;
-      film_diretor.innerHTML = `<b>Режиссер:</b> ${film.directorNode}`;
-      film_role.innerHTML = `<b>Роли:</b> ${film.roleNode}`;
-      film_description.innerHTML = `<b>Описание:</b> ${film.descriptionNode}`;
-      const film_data = document.querySelector(".film");
-      
-      film_data.appendChild(kino);
-      kino.querySelector(".delete-btn").addEventListener("click", () => delete_handler(film.id));
-      kino.querySelector(".change-btn").addEventListener("click", () => change_handler(film));
-  
-  });
-});
-}
-getFilm();
 //change
 const change_handler = (film) => {
   open_handler();
@@ -235,8 +246,41 @@ const change_handler = (film) => {
   });
 
   descriptionNode.value = film.descriptionNode;
-  btnChangeNode.addEventListener("click",() => put_film(film.id));
+  btnChangeNode.addEventListener("click", () => put_film(film.id));
 };
+
+//film put
+function put_film(id) {
+  let film_add = {
+    nameNode: nameNode.value,
+    countryNode: countryNode.value,
+    yearNode: +yearNode.value,
+    directorNode: directorNode.value,
+    roleNode: roleNode.value,
+    imgNode: imgNode.value,
+    videoNode: videoNode.value,
+    genresNode: [...genresNode]
+      .map((c) => {
+        if (c.checked) {
+          return c.value;
+        }
+      })
+      .filter(Boolean),
+    descriptionNode: descriptionNode.value,
+  };
+  
+  fetch(`${MY_URL}/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(film_add),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  .then(close_handler)
+  .then(console.log(1))
+  .then(getFilm)
+  .then(console.log(2));
+}
 //delete
 const delete_handler = (id) => {
   fetch(`${MY_URL}/${id}`, {
@@ -244,45 +288,6 @@ const delete_handler = (id) => {
   })
   .then(getFilm);
 };
-
-// modal window
-const open_handler = () => {
-    film_create_wrapper.style.display = "block";
-};
-btn_open.addEventListener("click", open_handler);
-const close_handler = () => {
-  btnAddNode.style.display = "block";
-  btnChangeNode.style.display = "none";
-  film_create_wrapper.style.display = "none";
-  errors.forEach((e) => (e.style.display = "none"));
-  errorGanreNode.style.display = "none";
-
-  let inputs = [
-    nameNode,
-    countryNode,
-    yearNode,
-    directorNode,
-    roleNode,
-    imgNode,
-    videoNode,
-    descriptionNode,
-  ];
-  inputs.forEach((input) => {
-    input.value = "";
-  });
-  [...genresNode].map((c) => {
-    if (c.checked) {
-      c.checked = false;
-    }
-  });
-};
-
-btn_close.addEventListener("click", close_handler);
-window.addEventListener("click", (event) => {
-  if (event.target == film_create_wrapper) {
-    close_handler();
-  }
-});
 
 //search
 let search = document.querySelector(".film-search-input");
