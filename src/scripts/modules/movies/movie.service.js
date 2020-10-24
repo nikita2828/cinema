@@ -50,6 +50,9 @@ let errors = [
 ];
 const errorGanreNode = document.getElementById("error_ganre");
 
+let editableFilmId = null;
+btnChangeNode.addEventListener("click", () => put_film());
+
 //get film
 function getFilm() {
   filmWrapperNode.innerHTML = "";
@@ -225,6 +228,7 @@ const render_film = () => {
 
 //change
 const change_handler = (film) => {
+  editableFilmId = film;
   open_handler();
   btnAddNode.style.display = "none";
   btnChangeNode.style.display = "block";
@@ -246,40 +250,40 @@ const change_handler = (film) => {
   });
 
   descriptionNode.value = film.descriptionNode;
-  btnChangeNode.addEventListener("click", () => put_film(film.id));
 };
-
 //film put
-function put_film(id) {
-  let film_add = {
-    nameNode: nameNode.value,
-    countryNode: countryNode.value,
-    yearNode: +yearNode.value,
-    directorNode: directorNode.value,
-    roleNode: roleNode.value,
-    imgNode: imgNode.value,
-    videoNode: videoNode.value,
-    genresNode: [...genresNode]
-      .map((c) => {
-        if (c.checked) {
-          return c.value;
-        }
-      })
-      .filter(Boolean),
-    descriptionNode: descriptionNode.value,
-  };
+function put_film() {
+  const id = editableFilmId ? editableFilmId.id : "" ;
+  if (id) {
+    let film_add = {
+      nameNode: nameNode.value,
+      countryNode: countryNode.value,
+      yearNode: +yearNode.value,
+      directorNode: directorNode.value,
+      roleNode: roleNode.value,
+      imgNode: imgNode.value,
+      videoNode: videoNode.value,
+      genresNode: [...genresNode]
+        .map((c) => {
+          if (c.checked) {
+            return c.value;
+          }
+        })
+        .filter(Boolean),
+      descriptionNode: descriptionNode.value,
+    };
+    
+    fetch(`${MY_URL}/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(film_add),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(close_handler)
+    .then(getFilm);
+  }
   
-  fetch(`${MY_URL}/${id}`, {
-    method: 'PUT',
-    body: JSON.stringify(film_add),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  .then(close_handler)
-  .then(console.log(1))
-  .then(getFilm)
-  .then(console.log(2));
 }
 //delete
 const delete_handler = (id) => {
